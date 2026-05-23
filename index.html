@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biswajit Mohapatra — AI & ML Engineer</title>
+  <meta name="description" content="Portfolio of Biswajit Mohapatra, an AI Engineer specializing in LLM systems, RAG, Agentic AI, and MLOps.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FAFAF9;
+      --surface: #FFFFFF;
+      --text: #1C1917;
+      --text-secondary: #78716C;
+      --text-muted: #A8A29E;
+      --accent: #0D9488;
+      --accent-light: #F0FDFA;
+      --accent-hover: #0F766E;
+      --border: #E7E5E4;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+      --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(13, 148, 136, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(13, 148, 136, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(120, 113, 108, 0.02) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; }
+    .section-header { margin-bottom: 64px; }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-label::before {
+      content: ''; display: inline-block;
+      width: 24px; height: 1px; background: var(--accent);
+    }
+
+    .section-title {
+      font-size: 2.25rem; font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.2; color: var(--text);
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100; padding: 20px 0;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgba(250, 250, 249, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+    .logo {
+      font-family: var(--font-mono); font-weight: 500; font-size: 0.875rem;
+      color: var(--text); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .logo-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; display: inline-block; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 0.8125rem;
+      color: var(--text-secondary); text-decoration: none;
+      transition: color 0.2s; font-weight: 500;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--text); }
+    .mobile-nav {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 16px 24px; flex-direction: column; gap: 16px;
+      list-style: none;
+    }
+    .mobile-nav.active { display: flex; }
+    .mobile-nav a { font-family: var(--font-mono); font-size: 0.875rem; color: var(--text); text-decoration: none; }
+
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding-top: 80px; position: relative;
+    }
+    .hero-content { max-width: 720px; }
+    .hero-label { font-family: var(--font-mono); font-size: 0.875rem; color: var(--accent); margin-bottom: 16px; display: block; }
+    .hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 24px; color: var(--text); }
+    .hero-subtitle { font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 400; color: var(--text-secondary); margin-bottom: 24px; min-height: 2rem; }
+    .cursor { display: inline-block; width: 2px; height: 1.2em; background: var(--accent); margin-left: 2px; animation: blink 1s step-end infinite; vertical-align: text-bottom; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero-desc { font-size: 1.125rem; color: var(--text-secondary); max-width: 560px; margin-bottom: 40px; line-height: 1.7; }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; border-radius: var(--radius-sm);
+      font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500;
+      text-decoration: none; transition: all 0.2s ease;
+      border: 1px solid transparent; cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: white; border-color: var(--accent); box-shadow: var(--shadow); }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-secondary { background: var(--surface); color: var(--text); border-color: var(--border); box-shadow: var(--shadow-sm); }
+    .btn-secondary:hover { border-color: var(--text-muted); transform: translateY(-1px); box-shadow: var(--shadow); }
+
+    .hero-meta {
+      margin-top: 48px; display: flex; gap: 20px; flex-wrap: wrap;
+      font-family: var(--font-mono); font-size: 0.8125rem; color: var(--text-muted);
+    }
+    .hero-meta span, .hero-meta a { display: flex; align-items: center; gap: 6px; }
+    .hero-meta a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .hero-meta a:hover { color: var(--accent); }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+      transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .about-text { font-size: 1.125rem; color: var(--text-secondary); line-height: 1.8; }
+    .about-text p + p { margin-top: 16px; }
+    .pillars { display: grid; gap: 16px; }
+    .pillar {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px; transition: all 0.3s ease;
+    }
+    .pillar:hover { border-color: var(--accent); background: var(--accent-light); }
+    .pillar-icon {
+      width: 40px; height: 40px; background: var(--accent-light);
+      border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; color: var(--accent);
+    }
+    .pillar-title { font-weight: 600; margin-bottom: 8px; color: var(--text); }
+    .pillar-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 1px; background: var(--border);
+    }
+    .timeline-item { position: relative; padding-bottom: 48px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: -36px; top: 6px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--accent);
+    }
+    .timeline-date { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--accent); font-weight: 500; margin-bottom: 8px; display: block; }
+    .timeline-role { font-size: 1.25rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .timeline-company { font-size: 1rem; color: var(--text-secondary); margin-bottom: 12px; font-weight: 500; }
+    .timeline-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .timeline-list li {
+      font-size: 0.9375rem; color: var(--text-secondary);
+      padding-left: 20px; position: relative; line-height: 1.6;
+    }
+    .timeline-list li::before { content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px; transition: all 0.3s ease;
+      display: flex; flex-direction: column; height: 100%; box-shadow: var(--shadow-sm);
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+    .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+    .project-title { font-size: 1.125rem; font-weight: 600; color: var(--text); }
+    .project-link { color: var(--text-muted); transition: color 0.2s; flex-shrink: 0; }
+    .project-link:hover { color: var(--accent); }
+    .project-desc { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      padding: 4px 10px; background: var(--bg);
+      border: 1px solid var(--border); border-radius: 999px;
+      color: var(--text-secondary); font-weight: 500;
+    }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .skill-category {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-sm);
+    }
+    .skill-category-title {
+      font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 20px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-tag {
+      font-family: var(--font-mono); font-size: 0.8125rem;
+      padding: 6px 14px; background: var(--bg);
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      color: var(--text); transition: all 0.2s;
+    }
+    .skill-tag:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .edu-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+    }
+    .edu-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .edu-year { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); font-weight: 500; margin-bottom: 12px; display: block; }
+    .edu-degree { font-weight: 600; font-size: 1rem; margin-bottom: 4px; color: var(--text); }
+    .edu-school { font-size: 0.875rem; color: var(--text-secondary); }
+    .edu-meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; }
+
+    .certs { margin-top: 48px; }
+    .certs-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 24px; color: var(--text); }
+    .certs-list { display: flex; flex-wrap: wrap; gap: 12px; }
+    .cert-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      font-size: 0.875rem; color: var(--text-secondary);
+      transition: all 0.2s; box-shadow: var(--shadow-sm);
+    }
+    .cert-badge:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow); }
+
+    .contact-content { text-align: center; max-width: 640px; margin: 0 auto; }
+    .contact-title { font-size: 2rem; font-weight: 700; margin-bottom: 16px; color: var(--text); }
+    .contact-desc { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 40px; line-height: 1.7; }
+    .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 24px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      text-decoration: none; color: var(--text);
+      font-weight: 500; font-size: 0.9375rem;
+      transition: all 0.2s; box-shadow: var(--shadow-sm);
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    footer { padding: 48px 0; text-align: center; border-top: 1px solid var(--border); margin-top: 48px; }
+    .footer-text { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--text-muted); }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
+    @media (max-width: 768px) {
+      .section { padding: 64px 0; }
+      .about-grid, .projects-grid, .skills-grid, .edu-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .hero-meta { flex-direction: column; gap: 12px; }
+      .timeline { padding-left: 24px; }
+      .timeline-dot { left: -28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo"><span class="logo-dot"></span>BM</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <ul class="mobile-nav" id="mobileNav">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-label">Hello, I'm</span>
+        <h1 class="hero-title">Biswajit Mohapatra</h1>
+        <div class="hero-subtitle">
+          <span id="typing-text"></span><span class="cursor"></span>
+        </div>
+        <p class="hero-desc">
+          AI Engineer with 5+ years of experience architecting production-grade LLM systems, 
+          RAG pipelines, and Agentic AI workflows. I translate complex enterprise challenges in 
+          regulated environments into scalable, secure, and observable AI solutions.
+        </p>
+        <div class="hero-buttons">
+          <a href="#experience" class="btn btn-primary">
+            View Experience
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <a href="resume.pdf" download class="btn btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download Resume
+          </a>
+          <a href="https://github.com/biswa-mohapatro" target="_blank" class="btn btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            GitHub
+          </a>
+        </div>
+        <div class="hero-meta">
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Bengaluru, Karnataka
+          </span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            +91 933-782-0819
+          </span>
+          <a href="mailto:biswajit-mohapatra@hotmail.com">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            biswajit-mohapatra@hotmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/biswajit-mohapatro" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://biswajit-mohapatra.medium.com" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+            Medium
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">01 — About</div>
+        <h2 class="section-title">Engineering Intelligence at Scale</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            I build the infrastructure and systems that allow enterprises to deploy AI with confidence. 
+            My work spans the full spectrum of AI engineering—from fine-tuning open-source models like Llama 3.2 
+            for sensitive data detection, to architecting RAG systems that eliminate manual document search, 
+            to designing agentic frameworks that autonomously manage software development lifecycles.
+          </p>
+          <p>
+            Currently at Takeda Pharmaceuticals, I lead cross-functional delivery of AI platforms in a highly 
+            regulated environment, ensuring every solution meets strict security, compliance, and governance standards. 
+            Previously at EY, I delivered systems that prevented millions in financial risk and automated 
+            compliance workflows for global clients.
+          </p>
+        </div>
+        <div class="pillars reveal stagger-2">
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <div class="pillar-title">LLM & Agentic Systems</div>
+            <div class="pillar-desc">RAG pipelines, prompt engineering, agent harnesses, and autonomous workflows using LangChain and AWS Bedrock.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+            </div>
+            <div class="pillar-title">MLOps & Cloud Architecture</div>
+            <div class="pillar-desc">Production-grade CI/CD, MLFlow tracking, containerized deployments on AWS, Azure, and Kubernetes.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <div class="pillar-title">Secure & Governed AI</div>
+            <div class="pillar-desc">PII/PHI detection, model guardrails, and compliant AI deployment for regulated industries like healthcare and finance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="section" style="background: var(--surface);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">02 — Experience</div>
+        <h2 class="section-title">Where I've Worked</h2>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <span class="timeline-date">Oct 2025 — Present</span>
+          <div class="timeline-role">Senior GenAI Engineer</div>
+          <div class="timeline-company">Takeda Pharmaceuticals · Bengaluru</div>
+          <ul class="timeline-list">
+            <li>Architected an end-to-end AI analytics platform using AWS Bedrock and conversational BI, driving a 13% increase in donor retention.</li>
+            <li>Fine-tuned and deployed Llama 3.2 3B for PII/PHI detection, establishing a safety guardrail layer for 20+ enterprise AI solutions.</li>
+            <li>Led a team of 3 engineers to design an Agentic SDLC framework with Agent Harness, context engineering, and LLM hand-off capabilities.</li>
+            <li>Established MLOps pipelines with Databricks, MLFlow experiment tracking, and GitHub Actions CI/CD for automated model deployment.</li>
+            <li>Conceptualized an Agentic AI Donor Engagement system with personalized slot recommendations, addressing 33% signup and 40% scheduling failures.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item reveal stagger-1">
+          <div class="timeline-dot"></div>
+          <span class="timeline-date">Jul 2024 — Sep 2025</span>
+          <div class="timeline-role">Senior Analyst</div>
+          <div class="timeline-company">Ernst & Young · Bengaluru</div>
+          <ul class="timeline-list">
+            <li>Delivered an AI-powered invoice management system that automated validation and prevented overpayments exceeding $2M annually.</li>
+            <li>Built a RAG-based SOP Navigator using AWS Bedrock and Databricks vector storage, eliminating manual PDF searches across teams.</li>
+            <li>Developed a conversational AI workbench for natural language querying of complex work order data, saving 10 hours per week.</li>
+            <li>Engineered an Agentic AI synthetic data generation tool to cross-check and validate ICD-10-CM codes against knowledge bases.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item reveal stagger-2">
+          <div class="timeline-dot"></div>
+          <span class="timeline-date">Jun 2022 — Jun 2024</span>
+          <div class="timeline-role">Associate Data Science Engineer</div>
+          <div class="timeline-company">Iamneo Edutech · Coimbatore</div>
+          <ul class="timeline-list">
+            <li>Designed and launched Neo-screener, an AI interview and video assessment product that increased company sales by 38% post-launch.</li>
+            <li>Built the backend with FastAPI and SQL, trained custom language models with PyTorch, and deployed via Docker and Azure Kubernetes.</li>
+            <li>Automated analytical report generation pipelines using GitHub Workflows, Google Cloud Functions, BigQuery, and MySQL, saving 20 hours per week.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item reveal stagger-3">
+          <div class="timeline-dot"></div>
+          <span class="timeline-date">Mar 2021 — May 2022</span>
+          <div class="timeline-role">Data Science Intern</div>
+          <div class="timeline-company">Ineuron.ai · Bengaluru</div>
+          <ul class="timeline-list">
+            <li>Maintained and debugged production automation pipelines and data processing systems.</li>
+            <li>Analyzed business datasets to uncover insights and communicated findings to stakeholders effectively.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">03 — Projects</div>
+        <h2 class="section-title">Open Source & Experiments</h2>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <div class="project-header">
+            <h3 class="project-title">PyShield</h3>
+            <a href="https://github.com/biswa-mohapatro/PySheild" target="_blank" class="project-link" aria-label="GitHub">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+          <p class="project-desc">
+            A zero-token, air-gapped, deterministic validation engine and MCP Skill Agent built to partner 
+            with external AI coding agents. Enforces a hybrid boundary: deterministic runtime validation 
+            (AST parsing, mutation testing, PII fuzzing, FIN001 policy checks, SHA-256 seals) on one side, 
+            and probabilistic AI healing on the other. Ships as both a CLI tool and an MCP server over stdio.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span><span class="tag">MCP</span><span class="tag">AST</span><span class="tag">Security</span><span class="tag">AI Agents</span><span class="tag">CI/CD</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal stagger-1">
+          <div class="project-header">
+            <h3 class="project-title">MLFlow-CNN-app</h3>
+            <a href="https://github.com/biswa-mohapatro/MLFlow-CNN-app" target="_blank" class="project-link" aria-label="GitHub">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+          <p class="project-desc">
+            A reproducible MLOps template for deep learning experiments. Demonstrates MLFlow project structure 
+            with Conda environment management, parameterized pipeline stages, and experiment tracking for 
+            CNN workflows. Designed as a boilerplate for teams standardizing their ML experiment lifecycle.
+          </p>
+          <div class="project-tags">
+            <span class="tag">MLFlow</span><span class="tag">MLOps</span><span class="tag">CNN</span><span class="tag">Python</span><span class="tag">Reproducibility</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal stagger-2">
+          <div class="project-header">
+            <h3 class="project-title">Flight Fare Prediction</h3>
+            <a href="https://github.com/biswa-mohapatro/flight" target="_blank" class="project-link" aria-label="GitHub">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+          <p class="project-desc">
+            End-to-end machine learning pipeline for dynamic flight fare forecasting. Features comprehensive 
+            data exploration and feature engineering, RandomForest regressor with RandomizedSearchCV and 
+            GridSearchCV hyperparameter optimization, and a Flask API deployed to Heroku for real-time inference.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Scikit-learn</span><span class="tag">Flask</span><span class="tag">Heroku</span><span class="tag">Hyperparameter Tuning</span><span class="tag">EDA</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal stagger-3">
+          <div class="project-header">
+            <h3 class="project-title">More on GitHub</h3>
+            <a href="https://github.com/biswa-mohapatro" target="_blank" class="project-link" aria-label="GitHub">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+          <p class="project-desc">
+            Explore additional repositories including data pipeline utilities, deep learning experiments, 
+            and agentic framework prototypes built during R&D cycles at Takeda and EY.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Open Source</span><span class="tag">AI Tooling</span><span class="tag">Python</span><span class="tag">DevTools</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Writing -->
+  <section id="writing" class="section" style="background: var(--surface);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">04 — Writing</div>
+        <h2 class="section-title">Technical Publications</h2>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <div class="project-header">
+            <h3 class="project-title">Enhancing LLMs Response: Buffer of Thoughts</h3>
+            <a href="https://biswajit-mohapatra.medium.com" target="_blank" class="project-link" aria-label="Medium">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+            </a>
+          </div>
+          <p class="project-desc">
+            Deep dive into the Buffer of Thoughts (BoT) framework for thought-augmented reasoning in large language models. 
+            Analyzes how meta-buffers, problem distillers, and thought retrieval mechanisms improve LLM accuracy by up to 
+            51% on reasoning benchmarks while reducing computational cost to 12% of traditional multi-query methods.
+          </p>
+          <div class="project-tags">
+            <span class="tag">LLM Reasoning</span><span class="tag">Chain-of-Thought</span><span class="tag">AI Research</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal stagger-1">
+          <div class="project-header">
+            <h3 class="project-title">From Rules to Reasoning: NLP's Evolution</h3>
+            <a href="https://biswajit-mohapatra.medium.com" target="_blank" class="project-link" aria-label="Medium">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+            </a>
+          </div>
+          <p class="project-desc">
+            An intuitive journey tracing the paradigm shift from rule-based NLP systems to modern neural reasoning. 
+            Contextualizes today's transformer architectures and LLMs within the broader history of language understanding, 
+            providing foundational perspective on why current approaches succeed where earlier generations failed.
+          </p>
+          <div class="project-tags">
+            <span class="tag">NLP History</span><span class="tag">Transformers</span><span class="tag">Foundations</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal stagger-2">
+          <div class="project-header">
+            <h3 class="project-title">The Deceptive Complexity of a Search Bar</h3>
+            <a href="https://biswajit-mohapatra.medium.com" target="_blank" class="project-link" aria-label="Medium">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+            </a>
+          </div>
+          <p class="project-desc">
+            A system design deep dive dissecting the engineering behind intelligent search systems. Covers indexing 
+            strategies, query understanding, ranking algorithms, and the infrastructure required to power modern 
+            information retrieval at scale—essential knowledge for AI engineers building RAG and semantic search.
+          </p>
+          <div class="project-tags">
+            <span class="tag">System Design</span><span class="tag">Information Retrieval</span><span class="tag">RAG</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal stagger-3">
+          <div class="project-header">
+            <h3 class="project-title">Slopsquatting: AI Code Suggestions</h3>
+            <a href="https://biswajit-mohapatra.medium.com" target="_blank" class="project-link" aria-label="Medium">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+            </a>
+          </div>
+          <p class="project-desc">
+            Analysis of supply chain vulnerabilities in AI-assisted coding workflows. Examines how hallucinated 
+            package names in LLM-generated code suggestions create novel security risks—typosquatting evolved—and 
+            discusses defensive strategies for enterprise development teams using Copilot, Cursor, and Claude Code.
+          </p>
+          <div class="project-tags">
+            <span class="tag">AI Security</span><span class="tag">Supply Chain</span><span class="tag">LLM Safety</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">05 — Skills</div>
+        <h2 class="section-title">Technical Expertise</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category reveal">
+          <div class="skill-category-title">AI & LLMs</div>
+          <div class="skill-tags">
+            <span class="skill-tag">LLM/RAG Implementation</span>
+            <span class="skill-tag">Prompt Engineering</span>
+            <span class="skill-tag">Retrieval-Augmented Generation</span>
+            <span class="skill-tag">Agentic AI (LangChain)</span>
+            <span class="skill-tag">Agent Harness</span>
+            <span class="skill-tag">LLM Fine-tuning</span>
+            <span class="skill-tag">LLM Distillation</span>
+            <span class="skill-tag">AWS Bedrock</span>
+          </div>
+        </div>
+        <div class="skill-category reveal stagger-1">
+          <div class="skill-category-title">MLOps & Cloud</div>
+          <div class="skill-tags">
+            <span class="skill-tag">CI/CD Pipelines</span>
+            <span class="skill-tag">MLFlow</span>
+            <span class="skill-tag">Model Versioning</span>
+            <span class="skill-tag">AI Observability</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Kubernetes</span>
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">Databricks</span>
+            <span class="skill-tag">Terraform</span>
+            <span class="skill-tag">CloudFormation</span>
+          </div>
+        </div>
+        <div class="skill-category reveal stagger-2">
+          <div class="skill-category-title">Engineering & Tools</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Vector Databases</span>
+            <span class="skill-tag">Microservices</span>
+            <span class="skill-tag">APIs</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">PyTorch</span>
+          </div>
+        </div>
+        <div class="skill-category reveal stagger-3">
+          <div class="skill-category-title">Data & Infrastructure</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Google BigQuery</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Google Cloud Functions</span>
+            <span class="skill-tag">Azure Container Registry</span>
+            <span class="skill-tag">Pandas</span>
+            <span class="skill-tag">NumPy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education" class="section" style="background: var(--surface);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">06 — Education</div>
+        <h2 class="section-title">Academic Background</h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card reveal">
+          <span class="edu-year">2017 — 2021</span>
+          <div class="edu-degree">Bachelor of Technology</div>
+          <div class="edu-school">GIET University</div>
+          <div class="edu-meta">CGPA: 8.24</div>
+        </div>
+        <div class="edu-card reveal stagger-1">
+          <span class="edu-year">2015 — 2017</span>
+          <div class="edu-degree">Higher Secondary Education</div>
+          <div class="edu-school">Gandhi Public School</div>
+          <div class="edu-meta">YOP: 2017</div>
+        </div>
+        <div class="edu-card reveal stagger-2">
+          <span class="edu-year">2014 — 2015</span>
+          <div class="edu-degree">Secondary Education</div>
+          <div class="edu-school">Gandhi Public School</div>
+          <div class="edu-meta">CGPA: 8.40 · YOP: 2015</div>
+        </div>
+      </div>
+
+      <div class="certs reveal">
+        <h3 class="certs-title">Certifications</h3>
+        <div class="certs-list">
+          <span class="cert-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Databricks GenAI Engineer Associate
+          </span>
+          <span class="cert-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            NVIDIA: Building RAG Agents with LLM
+          </span>
+          <span class="cert-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Databricks: Fundamentals of Generative AI
+          </span>
+          <span class="cert-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Full Stack Data Science Certification
+          </span>
+          <span class="cert-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Artificial Intelligence Operations
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-content reveal">
+        <h2 class="contact-title">Let's Build Something Intelligent</h2>
+        <p class="contact-desc">
+          I'm always open to discussing AI architecture, LLM systems, or opportunities to drive 
+          technology-led transformation in regulated enterprise environments.
+        </p>
+        <div class="contact-links">
+          <a href="https://github.com/biswa-mohapatro" target="_blank" class="contact-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/biswajit-mohapatro" target="_blank" class="contact-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://biswajit-mohapatra.medium.com" target="_blank" class="contact-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+            Medium
+          </a>
+          <a href="mailto:biswajit-mohapatra@hotmail.com" class="contact-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            Email
+          </a>
+          <a href="tel:+919337820819" class="contact-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            Phone
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-text">Biswajit Mohapatra · AI Engineer · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const roles = ["AI Engineer", "Machine Learning Engineer", "LLM Specialist", "MLOps Engineer"];
+    let roleIndex = 0, charIndex = 0, isDeleting = false;
+    const typingElement = document.getElementById('typing-text');
+
+    function typeEffect() {
+      const currentRole = roles[roleIndex];
+      if (isDeleting) {
+        typingElement.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingElement.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let typeSpeed = isDeleting ? 50 : 100;
+      if (!isDeleting && charIndex === currentRole.length) {
+        typeSpeed = 2000; isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; typeSpeed = 500;
+      }
+      setTimeout(typeEffect, typeSpeed);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('mobileNav').classList.toggle('active');
+    });
+
+    typeEffect();
+  </script>
+</body>
+</html>
