@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Biswajit Mohapatra — Senior AI Engineer · LLM, Agentic & Enterprise AI</title>
-  <meta name="description" content="Portfolio of Biswajit Mohapatra — Senior AI Engineer architecting production-grade LLM, RAG, and Agentic AI systems for regulated enterprises, and leading the cross-functional teams that ship them.">
+  <meta name="description" content="Portfolio of Biswajit Mohapatra — Senior AI Engineer building production-grade LLM, agentic and decision systems that solve complex operational problems for regulated enterprises, and training the models behind them.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -217,6 +217,26 @@
       color: var(--text-secondary); font-weight: 500;
     }
 
+    .project-card--wide { grid-column: 1 / -1; }
+
+    .project-meta {
+      font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em;
+      display: block; margin-bottom: 6px;
+    }
+    .project-links { display: flex; flex-wrap: wrap; gap: 16px; flex-shrink: 0; font-family: var(--font-mono); font-size: 0.8125rem; }
+    .project-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+    .project-links a:hover { color: var(--accent); }
+    .project-points { margin-bottom: 24px; }
+    .project-points strong { color: var(--text); font-weight: 600; }
+
+    .projects-more { margin-top: 32px; text-align: center; }
+    .projects-more a {
+      font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500;
+      color: var(--accent); text-decoration: none;
+    }
+    .projects-more a:hover { color: var(--accent-hover); }
+
     .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
     .skill-category {
       background: var(--surface); border: 1px solid var(--border);
@@ -297,6 +317,8 @@
 
     @media (max-width: 768px) {
       .section { padding: 64px 0; }
+      .project-header { flex-direction: column; gap: 12px; }
+      .project-card { padding: 24px; }
       .about-grid, .projects-grid, .skills-grid, .edu-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
@@ -350,9 +372,10 @@
           <span id="typing-text"></span><span class="cursor"></span>
         </div>
         <p class="hero-desc">
-          Senior AI Engineer with 5+ years architecting production-grade LLM, RAG, and Agentic AI
-          systems for regulated enterprises &mdash; and leading the cross-functional teams that ship
-          them. I turn ambiguous business problems into scalable, secure, observable AI platforms.
+          Senior AI Engineer with 5+ years building production-grade LLM, RAG, agentic and decision
+          systems for regulated enterprises &mdash; and leading the teams that ship them. I turn
+          ambiguous business problems into scalable, secure, observable AI systems, and I train
+          and evaluate models end to end when off-the-shelf ones fall short.
         </p>
         <div class="hero-buttons">
           <a href="#experience" class="btn btn-primary">
@@ -406,17 +429,19 @@
       <div class="about-grid">
         <div class="about-text reveal">
           <p>
-            I build the infrastructure and systems that allow enterprises to deploy AI with confidence. 
-            My work spans the full spectrum of AI engineering—from fine-tuning open-source models like Llama 3.2 
-            for sensitive data detection, to architecting RAG systems that eliminate manual document search, 
-            to designing agentic frameworks that autonomously manage software development lifecycles.
+            I build the infrastructure and systems that allow enterprises to deploy AI with confidence.
+            My work spans the full spectrum of AI engineering &mdash; from training and calibrating my own
+            421M-parameter decision model end to end, to fine-tuning Llama 3.2 for sensitive-data detection,
+            to architecting RAG systems and agentic frameworks that take manual work out of the loop.
           </p>
           <p>
             Currently at Takeda Pharmaceuticals, I lead a small engineering team and own end-to-end
             delivery of AI platforms in a highly regulated environment &mdash; from architecture and
-            vendor strategy to security review, deployment, and stakeholder sign-off. Previously at
-            EY, I delivered systems that streamlined financial risk management and automated
-            compliance workflows for global clients.
+            vendor strategy to security review, deployment, and stakeholder sign-off. I start from the
+            operational problem: quantify where time or money is lost, then build and validate the
+            system that closes the gap. Previously at EY, I
+            delivered systems that streamlined financial risk management and automated compliance
+            workflows for global clients.
           </p>
         </div>
         <div class="pillars reveal stagger-2">
@@ -426,6 +451,13 @@
             </div>
             <div class="pillar-title">LLM & Agentic Systems</div>
             <div class="pillar-desc">RAG pipelines, prompt engineering, agent harnesses, and autonomous workflows using LangChain and AWS Bedrock.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
+            <div class="pillar-title">Model Training & Evaluation</div>
+            <div class="pillar-desc">Full fine-tuning, curriculum design, probability calibration, and pre-registered evaluation with confidence intervals &mdash; on constrained hardware.</div>
           </div>
           <div class="pillar">
             <div class="pillar-icon">
@@ -468,6 +500,7 @@
           <div class="timeline-role">Senior AI Engineer</div>
           <div class="timeline-company">Takeda Pharmaceuticals · Bengaluru</div>
           <ul class="timeline-list">
+            <li>Built WCO Coach, an AI workforce-planning system for 200+ plasma centers that turns demand forecasts and staff schedules into person-level staffing recommendations, delivered through Microsoft Teams with a closed feedback loop.</li>
             <li>Architected an end-to-end AI analytics platform on AWS Bedrock with a conversational BI layer, giving the marketing org first-time visibility into donor drop-offs and driving retention decisions.</li>
             <li>Lead a team of 3&ndash;4 engineers delivering an Agentic SDLC framework &mdash; agent harness, context engineering, and LLM hand-off &mdash; while owning architecture, code review, and stakeholder reporting.</li>
             <li>Established the team's MLOps foundation on Databricks, MLFlow, and GitHub Actions, standardising experiment tracking, model registry, and CI/CD for all downstream AI work.</li>
@@ -520,9 +553,40 @@
     <div class="container">
       <div class="section-header reveal">
         <div class="section-label">03 — Projects</div>
-        <h2 class="section-title">Open Source & Experiments</h2>
+        <h2 class="section-title">Selected Projects</h2>
       </div>
       <div class="projects-grid">
+
+        <div class="project-card project-card--wide reveal">
+          <div class="project-header">
+            <div>
+              <span class="project-meta">Personal &middot; Open source (Apache-2.0)</span>
+              <h3 class="project-title">Nirnaya-Flash &mdash; Calibrated Decision Model</h3>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/biswa-mohapatro/nirnaya" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://huggingface.co/9337aaric/Nirnaya-Flash" target="_blank" rel="noopener noreferrer">Hugging Face</a>
+              <a href="https://pypi.org/project/nirnaya/" target="_blank" rel="noopener noreferrer">PyPI</a>
+              <a href="https://biswa-mohapatro.github.io/nirnaya/" target="_blank" rel="noopener noreferrer">Write-up</a>
+            </div>
+          </div>
+          <p class="project-desc">
+            A 421M-parameter, non-generative model that answers typed questions about text (choice, yes/no,
+            ordinal score) in a single forward pass. It returns a calibrated probability for every allowed
+            outcome, so there is no output to parse. I designed, trained, evaluated and released it
+            independently on a single laptop.
+          </p>
+          <ul class="timeline-list project-points">
+            <li><strong>Architecture.</strong> A ModernBERT-large encoder with a newly initialised decision transformer and a shared marker-scoring head. Each candidate answer attends to the input, the question and the competing options.</li>
+            <li><strong>Training under hardware limits.</strong> 46 experiments in MLX on a 24 GB Apple M5 Pro. Compiling forward, backward and AdamW into one graph cut step time from 0.354 to 0.156 s and peak memory from 12.9 to 8.3 GB.</li>
+            <li><strong>Catastrophic forgetting.</strong> Sequential full fine-tuning erased earlier skills (BoolQ 0.78 &rarr; 0.45). I replaced it with a joint replay curriculum, then fitted temperature calibration on a separate held-out split.</li>
+            <li><strong>Rigorous evaluation.</strong> Deterministic, leakage-checked, SHA-256-bound datasets and a single pre-registered run on a sealed test set. Results: 77.1% accuracy (95% CI 75.0&ndash;79.2%), ECE 0.054 (down from 0.130), 98.6% accuracy at &ge;0.90 confidence, and 10 ms median latency per question.</li>
+            <li><strong>Release.</strong> A PyPI package with MLX and PyTorch runtimes, Hugging Face weights, and an Ollama-compatible HTTP server with bearer-token auth.</li>
+          </ul>
+          <div class="project-tags">
+            <span class="tag">Model Training</span><span class="tag">MLX</span><span class="tag">PyTorch</span><span class="tag">ModernBERT</span><span class="tag">Calibration</span><span class="tag">Evaluation</span><span class="tag">Hugging Face</span>
+          </div>
+        </div>
 
         <div class="project-card reveal">
           <div class="project-header">
@@ -580,20 +644,26 @@
 
         <div class="project-card reveal stagger-3">
           <div class="project-header">
-            <h3 class="project-title">More on GitHub</h3>
-            <a href="https://github.com/biswa-mohapatro" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub">
+            <h3 class="project-title">Agentic SDLC</h3>
+            <a href="https://github.com/biswa-mohapatro/Agentic-SDLC" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             </a>
           </div>
           <p class="project-desc">
-            Explore additional repositories including data pipeline utilities, deep learning experiments, 
-            and agentic framework prototypes built during R&D cycles at Takeda and EY.
+            A multi-agent software-delivery framework for GitHub Copilot that takes work from PRD to
+            deployment-ready code. Eight role-based agents (lead, PRD, planner, architect, developer, test,
+            reviewer, docs) coordinate through an orchestrator with explicit hand-offs. On-demand skills and
+            scoped instructions handle context engineering, and lifecycle hooks block destructive commands
+            and keep an audit trail.
           </p>
           <div class="project-tags">
-            <span class="tag">Open Source</span><span class="tag">AI Tooling</span><span class="tag">Python</span><span class="tag">DevTools</span>
+            <span class="tag">Multi-Agent</span><span class="tag">Context Engineering</span><span class="tag">MCP</span><span class="tag">GitHub Copilot</span><span class="tag">Guardrails</span>
           </div>
         </div>
 
+      </div>
+      <div class="projects-more reveal">
+        <a href="https://github.com/biswa-mohapatro" target="_blank" rel="noopener noreferrer">More on GitHub &rarr;</a>
       </div>
     </div>
   </section>
@@ -607,7 +677,25 @@
       </div>
       <div class="projects-grid">
 
-        <div class="project-card reveal">
+        <div class="project-card project-card--wide reveal">
+          <div class="project-header">
+            <h3 class="project-title">Training a 421M Decision Model on One Laptop: 46 Experiments, Failures, and a Reproducible Recipe</h3>
+            <a href="https://biswa-mohapatro.github.io/nirnaya/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Read the write-up">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </div>
+          <p class="project-desc">
+            The full build log behind Nirnaya-Flash, including the experiments that failed. It covers why data
+            composition mattered more than optimizer tricks, how sequential full fine-tuning caused severe
+            catastrophic forgetting, and why an improvement your evaluation cannot resolve is not evidence.
+            It ends with the training, calibration and inference recipe I would use again.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Model Training</span><span class="tag">Catastrophic Forgetting</span><span class="tag">Calibration</span><span class="tag">Evaluation Design</span><span class="tag">MLX</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal stagger-1">
           <div class="project-header">
             <h3 class="project-title">Enhancing LLMs Response: Buffer of Thoughts</h3>
             <a href="https://biswajit-mohapatra.medium.com" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Medium">
@@ -693,7 +781,8 @@
             <span class="skill-tag">Foundation Models (Llama, Claude, GPT, Gemini)</span>
             <span class="skill-tag">Retrieval-Augmented Generation (RAG)</span>
             <span class="skill-tag">Prompt &amp; Context Engineering</span>
-            <span class="skill-tag">Fine-tuning (LoRA / QLoRA / PEFT)</span>
+            <span class="skill-tag">Fine-tuning (Full / LoRA / QLoRA / PEFT)</span>
+            <span class="skill-tag">Probability Calibration &amp; Selective Prediction</span>
             <span class="skill-tag">LLM Evaluation (RAGAS, LLM-as-Judge)</span>
             <span class="skill-tag">Guardrails &amp; PII/PHI Detection</span>
           </div>
@@ -719,6 +808,8 @@
             <span class="skill-tag">LLM Observability &amp; Tracing</span>
             <span class="skill-tag">Model Monitoring &amp; Drift</span>
             <span class="skill-tag">Vector DBs (ChromaDB, FAISS, Databricks)</span>
+            <span class="skill-tag">Data Quality Gates &amp; Audit Logging</span>
+            <span class="skill-tag">Idempotent Pipelines &amp; Dispatch</span>
           </div>
         </div>
 
@@ -727,7 +818,9 @@
           <div class="skill-tags">
             <span class="skill-tag">AWS (Bedrock, Lambda, S3)</span>
             <span class="skill-tag">Azure (AKS, ACR)</span>
-            <span class="skill-tag">Databricks Lakehouse</span>
+            <span class="skill-tag">Databricks (Lakehouse, Jobs, Apps, Model Serving)</span>
+            <span class="skill-tag">PySpark &amp; Delta Lake</span>
+            <span class="skill-tag">Microsoft Teams &amp; Power Automate</span>
             <span class="skill-tag">Docker &amp; Kubernetes</span>
             <span class="skill-tag">Terraform</span>
             <span class="skill-tag">PostgreSQL &amp; Snowflake</span>
@@ -740,6 +833,7 @@
             <span class="skill-tag">Python</span>
             <span class="skill-tag">SQL</span>
             <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">MLX (Apple Silicon)</span>
             <span class="skill-tag">Hugging Face Transformers</span>
             <span class="skill-tag">FastAPI</span>
           </div>
@@ -749,6 +843,7 @@
           <div class="skill-category-title">Architecture & Engineering Leadership</div>
           <div class="skill-tags">
             <span class="skill-tag">End-to-End AI Solution Design</span>
+            <span class="skill-tag">Evidence-Led Product Discovery</span>
             <span class="skill-tag">Reference Architectures (RAG, Agentic, MLOps)</span>
             <span class="skill-tag">Security, Compliance &amp; AI Governance</span>
             <span class="skill-tag">Leading Cross-Functional Delivery</span>
